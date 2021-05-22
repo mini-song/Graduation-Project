@@ -149,37 +149,64 @@ df2['일시'] = pd.to_datetime(df['일시'], format='%Y-%m-%d %H:%M:%S', errors=
 df2.dtypes
 
 from pycaret.regression import *
+from pycaret.classification import *
 
-clf = setup(data = df2, target = 'dangjin_floating')
+# +
+    
+#clf = setup(data = df2, target = 'dangjin_floating')
+#clf
+
+# +
+#best_3 = compare_models(sort='MSE', n_select = 3)
+
+# +
+#blended = blend_models(estimator_list = best_3, fold = 5)
+
+# +
+
+#pred_holdout = predict_model(blended)
+#final_model = finalize_model(blended)
+#predictions = predict_model(final_model, data = test_df)
+#predictions
+
+
+# +
+#model_catboost = create_model('catboost', fold = 5)
+#model_catboost = tune_model(model_catboost, fold=5, optimize = 'RMSE', choose_better = True)
+# -
+
+clf = setup(data = df2, target = '')
 clf
 
-best_3 = compare_models(sort='MSE', n_select = 3)
+df
+
+df = pd.read_csv('ASOS_dangjin_from_2018.csv',encoding='cp949')
+
+df
+
+df.info()
+
+df['풍향(16방위)'] = df['풍향(16방위)'].apply(lambda x: 7.0 if x==360 else (x//45))
+df['풍향(16방위)']
+
+df['풍향(16방위)'].value_counts()
+
+clf = setup(data = df, 
+            target = '풍향(16방위)',
+            ignore_low_variance=True,
+#            normalize=True,
+            remove_multicollinearity=True,
+            multicollinearity_threshold=0.9,
+            session_id = 20210302,
+            combine_rare_levels = True, rare_level_threshold = 0.1)
+clf
+
+best_3 = compare_models(n_select = 3)
 
 blended = blend_models(estimator_list = best_3, fold = 5)
+
 
 pred_holdout = predict_model(blended)
 final_model = finalize_model(blended)
 predictions = predict_model(final_model, data = test_df)
 predictions
-
-
-model_catboost = create_model('catboost', fold = 5)
-model_catboost = tune_model(model_catboost, fold=5, optimize = 'AUC', choose_better = True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
