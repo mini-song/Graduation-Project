@@ -14,9 +14,8 @@
 #     name: python3
 # ---
 
-from google.colab import drive
-drive.mount('/content/drive/')
 
+# %%
 from numpy.core.numeric import full
 import pandas as pd
 import numpy as np
@@ -297,7 +296,7 @@ def parallel_processing(dataframe, function, num_cores):
 # %%
 
 import numpy as np
-dangjin_fcst = parallel_processing(dangjin_fcst, forecast_change, 12)
+dangjin_fcst = parallel_processing(dangjin_fcst, forecast_change, 6)
 dangjin_fcst
 
 # +
@@ -492,3 +491,42 @@ pd.concat([a, b], axis=1)
 
 
 
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%

@@ -209,10 +209,10 @@ def evaluate(model, iterator, device):
 
             rmse = torch.sqrt(mse_func(pred, outputs) + eps)
             mae = mae_func(pred, outputs)
-         
+            
 
-            # valid_loss[0] += rmse.item()
-            # valid_loss[1] += mae.item()
+            valid_loss[0] += rmse.item()
+            valid_loss[1] += mae.item()
             
         
     return valid_loss / len(iterator)
